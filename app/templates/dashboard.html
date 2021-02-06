@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <script src="../static/js/socket.io.min.js"></script>
+    <script src="../static/js/jquery-3.4.1.slim.min.js"></script>
+    <script src="../static/js/popper.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/webchat.js"></script>
+    <style>
+        body {
+            font-family: 'Karma', serif;
+            font-family: 'Noto Sans', sans-serif;
+            background: #fe8c00;
+            background: -webkit-linear-gradient(to left, #f83600, #fe8c00);
+            background: linear-gradient(to left, #f83600, #fe8c00);
+        }
+
+        .cont {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            margin: 20px 5%;
+        }
+
+        .container-body {
+            align-self: center;
+        }
+
+        .special-items {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .special {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .special-items li {
+            margin-top: 0.9em;
+            list-style: none;
+            /* border-bottom: 1px solid #fff; */
+        }
+
+        .desc {
+            padding: 10px;
+            flex: 1;
+            margin-top: -5px;
+
+        }
+
+        .desc .text {
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        .desc .subtext {
+            font-size: 1em;
+            color: yellow;
+        }
+
+        .thumb img {
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='mb-2 container mt-5'>
+        <h3 class='font-weight-bold text-center text-white'
+            style="font-family:courier,arial,helvetica, Brush Script MT;">
+            Today's Special</h3>
+    </div>
+    <div class="container mt-5" id="messagesContainer">
+        <div class='cont'>
+            <div class='container-body'>
+                <div class="menulist">
+                    <div>
+                        <ul class="special-items">
+                            {% for meal in meals%}
+                            <li class="special">
+                                <div class="thumb">
+                                    <img width='250px' height='150px' src="{{meal.image}}">
+                                </div>
+                                <div class="desc" style="float: left;">
+                                    <div class="text text-white">{{meal.name}}</div>
+                                    <div class="subtext">{{meal.content}}</div>
+                                </div>
+                            </li>
+                            {%endfor%}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if not meals %}
+        <div class="container">
+            <div class="alert alert-info center-block" role="alert">
+                <p class="text-center">No Menu Available!</p>
+            </div>
+        </div>
+        {%endif%}
+</body>
+
+</html>
